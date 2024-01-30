@@ -5,15 +5,14 @@ const cardTemplate = document.querySelector('#card-template').content;
 const placesList = document.querySelector(".places__list");
 
 // @todo: Функция создания карточки
-function createCard(cardInfo) {
+function createCard(cardInfo, deleteCardCallback) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const deleteButton = cardElement.querySelector('.card__delete-button');
   cardElement.querySelector('.card__image').src = cardInfo.link;
+  cardElement.querySelector('.card__image').alt = cardInfo.name;
   cardElement.querySelector('.card__title').textContent = cardInfo.name;
 
-  deleteButton.addEventListener('click', () => {
-    deleteCard(cardElement);
-  })
+  deleteButton.addEventListener('click', () => deleteCardCallback(cardElement))
   return cardElement;
 }
 
@@ -24,5 +23,5 @@ function deleteCard(cardElement) {
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach(item => {
-  placesList.append(createCard(item));
+  placesList.append(createCard(item, deleteCard));
 })
