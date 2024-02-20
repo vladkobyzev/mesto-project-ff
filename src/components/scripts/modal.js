@@ -1,26 +1,34 @@
+import {profileName, profileDescription, inputName, inputDescription} from '../../index'
+
 function openModal(popup) {
+  inputName.value = profileName.textContent;
+  inputDescription.value = profileDescription.textContent;
+
   popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', (evt) => handleEscClose(evt, popup));
-  popup.addEventListener('click', (evt) => handleOverlayClose(evt, popup));
-  popup.querySelector('.popup__close').addEventListener('click', (evt) => closeModal(popup))
+  document.addEventListener('keydown', handleEscClose);
 }
 
 function closeModal(popup) {
   popup.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', (evt) => handleEscClose(evt, popup));
-  popup.removeEventListener('click', (evt) => handleOverlayClose(evt, popup));
 }
 
-function handleEscClose(evt, currentPopup) {
+function handleEscClose(evt) {
+  const openedPopup = document.querySelector('.popup_is-opened');
   if (evt.key === 'Escape') {
-    closeModal(currentPopup)
+    closeModal(openedPopup)
   }
 }
 
-function handleOverlayClose(evt, currentPopup) {
-  if (evt.target === currentPopup) {
-    closeModal(currentPopup)
+function handleOverlayClose(evt) {
+  const openedPopup = document.querySelector('.popup_is-opened');
+  if (evt.target === openedPopup) {
+    closeModal(openedPopup)
   }
 }
 
-export {openModal, closeModal}
+function setCloseModalOnOverlayListeners(popupList) {
+  popupList.forEach(popup => popup.addEventListener('click', handleOverlayClose))
+}
+
+export {openModal, closeModal, setCloseModalOnOverlayListeners}
