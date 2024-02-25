@@ -1,13 +1,13 @@
 import './pages/index.css';
-import { createCard, likeCard, openImage } from './components/scripts/cards.js';
+import { createCard, likeCard, deleteCard } from './components/scripts/cards.js';
 import { initialCards } from './components/scripts/cardsData.js';
-import { openModal, closeModal, setCloseModalOnOverlayListeners} from './components/scripts/modal.js';
+import { openModal, openPropfilePopup, closeModal, setCloseModalOnOverlayListeners} from './components/scripts/modal.js';
 
 // DOM узлы
 const cardsContainer = document.querySelector(".places__list");
 const editButton = document.querySelector('.profile__edit-button');
 const editPopup = document.querySelector('.popup_type_edit');
-const popupCloseButton = editPopup.querySelector('.popup__close')
+const profilePopupCloseButton = editPopup.querySelector('.popup__close')
 const formEdit = document.forms.profile;
 const profileName = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
@@ -19,13 +19,11 @@ const newCardPopup = document.querySelector('.popup_type_new-card');
 const newCardPopupCLoseButton = newCardPopup.querySelector('.popup__close')
 const inputPlace = formNewCard.elements.placename;
 const inputLink = formNewCard.elements.link;
-const closeButtonContainer = document.querySelectorAll('.popup__close');
-const popupContainer = document.querySelectorAll('.popup');
-
-// Функция удаления карточки
-function deleteCard(cardElement) {
-  cardElement.remove();
-}
+const popupCloseButtonList = document.querySelectorAll('.popup__close');
+const popupList = document.querySelectorAll('.popup');
+const imagePopup = document.querySelector('.popup_type_image');
+const imagePopupPhoto = imagePopup.querySelector('.popup__image');
+const imageCaption = imagePopup.querySelector('.popup__caption');
 
 // Редактирование пользователя
 function handleProfileFormSubmit(evt) {
@@ -47,24 +45,31 @@ function handleAddCardFormSubmit(evt) {
   closeModal(newCardPopup);
 }
 
+// Open Image Popup 
+function openImage(cardInfo) {
+  imagePopupPhoto.src = cardInfo.link;
+  imagePopupPhoto.alt = cardInfo.name;
+  imageCaption.textContent = cardInfo.name;
+
+  openModal(imagePopup)
+}
+
 // Вывести карточки на страницу
 initialCards.forEach(item => {
   cardsContainer.append(createCard(item, deleteCard, likeCard, openImage));
 })
 
-closeButtonContainer.forEach(closeButton => closeButton.addEventListener('click', (evt) => {
-  const openedPopup = document.querySelector('.popup_is-opened');
+popupCloseButtonList.forEach(closeButton => closeButton.addEventListener('click', (evt) => {
+  const openedPopup = evt.target.closest('.popup');
   closeModal(openedPopup)
 }));
 
-setCloseModalOnOverlayListeners(popupContainer)
+setCloseModalOnOverlayListeners(popupList)
 
 // Event listeners
-editButton.addEventListener('click', () => openModal(editPopup));
-popupCloseButton.addEventListener('click', () => closeModal(editPopup));
+editButton.addEventListener('click', () => openPropfilePopup(editPopup));
 formEdit.addEventListener('submit', handleProfileFormSubmit)
 formNewCard.addEventListener('submit', handleAddCardFormSubmit)
 addCardButton.addEventListener('click',() => openModal(newCardPopup));
-newCardPopupCLoseButton.addEventListener('click', () => closeModal(newCardPopup));
 
 export {profileName, profileDescription, inputName, inputDescription}

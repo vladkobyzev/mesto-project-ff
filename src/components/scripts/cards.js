@@ -1,9 +1,6 @@
 import { openModal } from './modal.js';
 
 const cardTemplate = document.querySelector('#card-template').content;
-const imagePopup = document.querySelector('.popup_type_image');
-const imagePopupPhoto = imagePopup.querySelector('.popup__image');
-const imageCaprion = imagePopup.querySelector('.popup__caption');
 
 // Create new card
 function createCard(cardInfo, deleteCardCallback, likeCardCallback, openImageCardCallback) {
@@ -29,13 +26,9 @@ function likeCard(cardElement) {
   likeButton.classList.toggle('card__like-button_is-active');
 }
 
-// Open Image Popup 
-function openImage(cardInfo) {
-  imagePopupPhoto.src = cardInfo.link;
-  imagePopupPhoto.alt = cardInfo.name;
-  imageCaprion.textContent = cardInfo.name;
-
-  openModal(imagePopup)
+// Функция удаления карточки
+function deleteCard(cardElement) {
+  cardElement.remove();
 }
 
-export {createCard, openImage, likeCard}
+export {createCard, likeCard, deleteCard}
