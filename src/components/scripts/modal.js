@@ -1,15 +1,6 @@
-import {profileName, profileDescription, inputName, inputDescription} from '../../index'
-
 function openModal(popup) {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', handleEscClose);
-}
-
-function openPropfilePopup(popup) { 
-  inputName.value = profileName.textContent;
-  inputDescription.value = profileDescription.textContent;
-
-  openModal(popup);
 }
 
 function closeModal(popup) {
@@ -25,9 +16,8 @@ function handleEscClose(evt) {
 }
 
 function handleOverlayClose(evt) {
-  const openedPopup = document.querySelector('.popup_is-opened');
-  if (evt.target === openedPopup) {
-    closeModal(openedPopup)
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.target)
   }
 }
 
@@ -35,4 +25,4 @@ function setCloseModalOnOverlayListeners(popupList) {
   popupList.forEach(popup => popup.addEventListener('click', handleOverlayClose))
 }
 
-export {openModal, openPropfilePopup, closeModal, setCloseModalOnOverlayListeners}
+export {openModal, closeModal, setCloseModalOnOverlayListeners}

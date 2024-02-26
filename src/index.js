@@ -1,13 +1,12 @@
 import './pages/index.css';
 import { createCard, likeCard, deleteCard } from './components/scripts/cards.js';
 import { initialCards } from './components/scripts/cardsData.js';
-import { openModal, openPropfilePopup, closeModal, setCloseModalOnOverlayListeners} from './components/scripts/modal.js';
+import { openModal, closeModal, setCloseModalOnOverlayListeners} from './components/scripts/modal.js';
 
 // DOM узлы
 const cardsContainer = document.querySelector(".places__list");
 const editButton = document.querySelector('.profile__edit-button');
 const editPopup = document.querySelector('.popup_type_edit');
-const profilePopupCloseButton = editPopup.querySelector('.popup__close')
 const formEdit = document.forms.profile;
 const profileName = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
@@ -16,7 +15,6 @@ const inputDescription = formEdit.elements.description;
 const formNewCard = document.forms.newplace;
 const addCardButton = document.querySelector('.profile__add-button');
 const newCardPopup = document.querySelector('.popup_type_new-card');
-const newCardPopupCLoseButton = newCardPopup.querySelector('.popup__close')
 const inputPlace = formNewCard.elements.placename;
 const inputLink = formNewCard.elements.link;
 const popupCloseButtonList = document.querySelectorAll('.popup__close');
@@ -52,6 +50,13 @@ function openImage(cardInfo) {
   imageCaption.textContent = cardInfo.name;
 
   openModal(imagePopup)
+}
+
+function openPropfilePopup(popup) { 
+  inputName.value = profileName.textContent;
+  inputDescription.value = profileDescription.textContent;
+
+  openModal(popup);
 }
 
 // Вывести карточки на страницу
