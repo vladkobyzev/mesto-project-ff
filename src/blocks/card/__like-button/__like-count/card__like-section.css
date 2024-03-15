@@ -1,0 +1,13 @@
+.card__like-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 35px;
+}
+
+.card__like-count{
+  display: flex;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+}

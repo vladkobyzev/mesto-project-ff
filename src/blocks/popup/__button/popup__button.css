@@ -19,6 +19,30 @@
   cursor: pointer;
 }
 
+.button_inactive {
+  background-color: white;
+  border:1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+}
+.button_inactive:hover {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.form__input_type_error {
+  border-bottom:1px solid red;
+}
+
+.popup__form-input-error {
+  color: red;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-style:  normal;
+  font-weight: 400;
+  padding-top: 3px;
+}
+
 @media screen and (max-width: 568px) {
   .popup__button {
     font-size: 14px;
