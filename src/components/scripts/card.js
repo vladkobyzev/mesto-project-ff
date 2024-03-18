@@ -38,32 +38,33 @@ function createCard(cardInfo, deleteCardCallback, likeCardCallback, openImageCar
 function likeCard(cardElement, cardId) {
   const likeButton = cardElement.querySelector('.card__like-button');
   const cardLikeCount = cardElement.querySelector('.card__like-count');
-  if (likeButton.classList.contains('card__like-button_is-active')) {
-    deleteLikeCard(cardId)
+  const likeMethod = likeButton.classList.contains('card__like-button_is-active')
+    ? deleteLikeCard
+    : addLikeCard;
+
+  likeMethod(cardId)
     .then(data => {
+      likeButton.classList.toggle('card__like-button_is-active');
       updateLikeCount(data, cardLikeCount);
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  } else {
-    addLikeCard(cardId)
-    .then(data => {
-      updateLikeCount(data, cardLikeCount)
-    });;
-  }
-  likeButton.classList.toggle('card__like-button_is-active');
 }
 
 function updateLikeCount (cardInfo, cardLikeCount) {
-  if (cardInfo.likes.length != 0) {
-    cardLikeCount.textContent = cardInfo.likes.length
-  } else {
-    cardLikeCount.textContent = '';
-  }
+  cardLikeCount.textContent = cardInfo.likes.length || '';
 }
 
 // Функция удаления карточки
 function deleteCard(cardElement, cardId) {
   deleteCardRequest(cardId)
-  cardElement.remove();
+    .then(res => {
+      cardElement.remove();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 export {createCard, likeCard, deleteCard}

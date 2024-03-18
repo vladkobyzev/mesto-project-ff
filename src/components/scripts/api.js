@@ -12,9 +12,6 @@ const getCurrentUser = () => {
   })
   .then(res => {
     return getResponseData(res);
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
@@ -29,9 +26,6 @@ const updateCurrentUser = (name, about) => {
   })
   .then(res => {
     return getResponseData(res);
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
@@ -45,9 +39,6 @@ const updateUserAvatar = (avatarUrl) => {
   })
   .then(res => {
     return getResponseData(res);
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
@@ -64,9 +55,6 @@ const getAllCards = () => {
   })
   .then(res => {
     return getResponseData(res);
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
@@ -81,9 +69,6 @@ const addNewCard = (name, link) => {
   })
   .then(res => {
     return getResponseData(res);
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
@@ -94,9 +79,6 @@ const deleteCardRequest = (cardId) => {
   })
   .then(res => {
     console.log(`Card with id: ${cardId} was deleted`)
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
@@ -107,9 +89,6 @@ const addLikeCard = (cardId) => {
   })
   .then(res => {
     return getResponseData(res);
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
@@ -120,9 +99,6 @@ const deleteLikeCard = (cardId) => {
   })
   .then(res => {
     return getResponseData(res);
-  })
-  .catch(err => {
-    console.log(err);
   });
 }
 
